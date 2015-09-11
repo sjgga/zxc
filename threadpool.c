@@ -41,7 +41,7 @@ zxc_threadpool_t *threadpool_init(int thread_num) {
         goto err;
     }
     
-    int i, rc;
+    int i;
     for (i=0; i<thread_num; ++i) {
         if (pthread_create(&(pool->threads[i]), NULL, threadpool_worker, (void *)pool) != 0) {
             threadpool_destroy(pool, 0);
