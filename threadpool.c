@@ -116,7 +116,7 @@ int threadpool_free(zxc_threadpool_t *pool) {
     }
 
     zxc_task_t *old;
-    /* pool->head is a dummy head */
+
     while (pool->head->next) {
         old = pool->head->next;
         pool->head->next = pool->head->next->next;
