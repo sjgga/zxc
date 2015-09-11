@@ -188,7 +188,7 @@ static void *threadpool_worker(void *arg) {
     while (1) {
         pthread_mutex_lock(&(pool->lock));
         
-        /*  Wait on condition variable, check for spurious wakeups. */
+     
         while ((pool->queue_size == 0) && !(pool->shutdown)){
             pthread_cond_wait(&(pool->cond), &(pool->lock));
         }
