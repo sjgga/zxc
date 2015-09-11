@@ -4,7 +4,6 @@
 
 static const char* get_file_type(const char *type);
 static void parse_uri(char *uri, int length, char *filename, char *querystring);
-static void do_error(int fd, char *cause, char *errnum, char *shortmsg, char *longmsg);
 static char *ROOT = NULL;
 
 mime_type_t zxc_mime[] = 
@@ -38,7 +37,7 @@ void do_request(void *ptr) {
     struct stat sbuf;
     int n;
     ROOT = r->root;
-    debug("ROOT=%s", ROOT);
+
     
     for(;;) {
         n = read(fd, r->last, (uint64_t)r->buf + MAX_BUF - (uint64_t)r->last);
@@ -126,7 +125,6 @@ void do_request(void *ptr) {
 
 err:
 close:
-    //free(ptr);
     close(fd);
 }
 
@@ -187,7 +185,6 @@ void serve_static(int fd, char *filename, size_t filesize, zxc_http_out_t *out) 
     sprintf(header, "%s\r\n", header);
 
     n = rio_writen(fd, header, strlen(header));
-    check(n == strlen(header), "rio_writen error, errno = %d", errno);
     if (n != strlen(header)) {
       
         goto out; 
