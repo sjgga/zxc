@@ -345,7 +345,7 @@ int zxc_http_parse_request_body(zxc_http_request_t *r) {
             if (ch == LF) {
                 state = sw_crlf;
                 // save the current http header
-                hd = (zxc_http_request_t *)malloc(sizeof(zxc_http_request_t));
+                hd = (zxc_http_header_t *)malloc(sizeof(zxc_http_header_t));
                 hd->key_start   = r->cur_header_key_start;
                 hd->key_end     = r->cur_header_key_end;
                 hd->value_start = r->cur_header_value_start;
