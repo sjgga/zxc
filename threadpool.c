@@ -63,7 +63,7 @@ err:
 
 
 int threadpool_add(zxc_threadpool_t *pool, void (*func)(void *), void *arg) {
-    int rc, err = 0;
+    int err = 0;
     if (pool == NULL || func == NULL) {
        
         return -1;
@@ -94,7 +94,7 @@ int threadpool_add(zxc_threadpool_t *pool, void (*func)(void *), void *arg) {
 
     pool->queue_size++;
     
-    rc = pthread_cond_signal(&(pool->cond));
+    pthread_cond_signal(&(pool->cond));
 
 
 out:
