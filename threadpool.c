@@ -217,7 +217,6 @@ static void *threadpool_worker(void *arg) {
     }
 
     pool->started--;
-    pthread_mutex_unlock(&(pool->lock));
     pthread_exit(NULL);
 
     return NULL;
