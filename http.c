@@ -181,7 +181,7 @@ void serve_static(int fd, char *filename, size_t filesize, zxc_http_out_t *out) 
 
     }
 
-    sprintf(header, "%sServer: Zaver\r\n", header);
+    sprintf(header, "%sServer: ZXC\r\n", header);
     sprintf(header, "%s\r\n", header);
 
     n = rio_writen(fd, header, strlen(header));
