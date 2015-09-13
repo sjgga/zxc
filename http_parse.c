@@ -39,7 +39,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
             }
 
             if ((ch < 'A' || ch > 'Z') && ch != '_') {
-                return zxc_HTTP_PARSE_INVALID_METHOD;
+                return ZXC_HTTP_PARSE_INVALID_METHOD;
             }
 
             state = sw_method;
@@ -55,7 +55,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
 
                 case 3:
                     if (zxc_str3_cmp(m, 'G', 'E', 'T', ' ')) {
-                        r->method = zxc_HTTP_GET;
+                        r->method = ZXC_HTTP_GET;
                         break;
                     }
 
@@ -63,18 +63,18 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
 
                 case 4:
                     if (zxc_str3Ocmp(m, 'P', 'O', 'S', 'T')) {
-                        r->method = zxc_HTTP_POST;
+                        r->method = ZXC_HTTP_POST;
                         break;
                     }
 
                     if (zxc_str4cmp(m, 'H', 'E', 'A', 'D')) {
-                        r->method = zxc_HTTP_HEAD;
+                        r->method = ZXC_HTTP_HEAD;
                         break;
                     }
 
                     break;
                 default:
-                    r->method = zxc_HTTP_UNKNOWN;
+                    r->method = ZXC_HTTP_UNKNOWN;
                     break;
                 }
                 state = sw_spaces_before_uri;
@@ -82,7 +82,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
             }
 
             if ((ch < 'A' || ch > 'Z') && ch != '_') {
-                return zxc_HTTP_PARSE_INVALID_METHOD;
+                return ZXC_HTTP_PARSE_INVALID_METHOD;
             }
 
             break;
@@ -100,7 +100,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
                 case ' ':
                     break;
                 default:
-                    return zxc_HTTP_PARSE_INVALID_REQUEST;
+                    return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
             break;
 
@@ -125,7 +125,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
                 state = sw_http_H;
                 break;
             default:
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
             break;
 
@@ -135,7 +135,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
                 state = sw_http_HT;
                 break;
             default:
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
             break;
 
@@ -145,7 +145,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
                 state = sw_http_HTT;
                 break;
             default:
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
             break;
 
@@ -155,7 +155,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
                 state = sw_http_HTTP;
                 break;
             default:
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
             break;
 
@@ -165,14 +165,14 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
                 state = sw_first_major_digit;
                 break;
             default:
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
             break;
 
         /* first digit of major HTTP version */
         case sw_first_major_digit:
             if (ch < '1' || ch > '9') {
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
 
             r->http_major = ch - '0';
@@ -187,7 +187,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
             }
 
             if (ch < '0' || ch > '9') {
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
 
             r->http_major = r->http_major * 10 + ch - '0';
@@ -196,7 +196,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
         /* first digit of minor HTTP version */
         case sw_first_minor_digit:
             if (ch < '0' || ch > '9') {
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
 
             r->http_minor = ch - '0';
@@ -220,7 +220,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
             }
 
             if (ch < '0' || ch > '9') {
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
 
             r->http_minor = r->http_minor * 10 + ch - '0';
@@ -236,7 +236,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
             case LF:
                 goto done;
             default:
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
             break;
 
@@ -247,7 +247,7 @@ int zxc_http_parse_request_line(zxc_http_request_t *r) {
             case LF:
                 goto done;
             default:
-                return zxc_HTTP_PARSE_INVALID_REQUEST;
+                return ZXC_HTTP_PARSE_INVALID_REQUEST;
             }
         }
     }
